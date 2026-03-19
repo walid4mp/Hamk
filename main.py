@@ -149,4 +149,5 @@ def main():
     app.add_handler(MessageHandler(filters.CONTACT, phone_handler))
     app.run_polling()
 
-if __name__ == '__
+if __name__ == "__main__":
+    main()
