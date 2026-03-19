@@ -3,7 +3,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Keyboar
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, ContextTypes, filters
 
 # ضع التوكن هنا أو في متغير بيئة BOT_TOKEN
-BOT_TOKEN = os.getenv("BOT_TOKEN", "ضع_التوكن_هنا")
+BOT_TOKEN = os.getenv("8425568863:AAE0d-o2Aw6qK3lXpXk0PrMa7GHZSDdPEk4", "ضع_التوكن_هنا")
 ADMIN_ID = 7900627755  # ضع معرف صاحب المحل هنا
 
 # قاعدة البيانات
@@ -140,4 +140,13 @@ async def phone_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         phone = update.message.contact.phone_number
         name = update.message.contact.first_name
         await context.bot.send_message(ADMIN_ID, f"📱 إشعار: {name} أرسل رقمه للتواصل: {phone}")
-        await update.message.reply_text("✅ تم إرسال
+        await update.message.reply_text("✅ تم إرسال رقمك لصاحب المحل.")
+
+def main():
+    app = Application.builder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler("start", show_main))
+    app.add_handler(CallbackQueryHandler(button))
+    app.add_handler(MessageHandler(filters.CONTACT, phone_handler))
+    app.run_polling()
+
+if __name__ == '__
